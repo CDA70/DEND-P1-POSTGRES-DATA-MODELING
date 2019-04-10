@@ -7,6 +7,15 @@ import numpy as np
 
 
 def process_song_file(cur, filepath):
+    """
+        Reads a json file from the song_data folder, reads information 
+        of songs and artists and saves them to songs and artists tables in 
+        the database
+        Arguments:
+        cur: DB cursor
+        filepath: path to json file
+        Return: None
+    """
     # open song file
     df = pd.read_json(filepath, lines=True)
     
@@ -22,6 +31,15 @@ def process_song_file(cur, filepath):
 
 
 def process_log_file(cur, filepath):
+    """
+        Reads a json file from the log_data folder, reads information 
+        of time and users and saves them to time and users tables in 
+        the database. Additionally it saves data in the fact table, songplay table
+        Arguments:
+        cur: DB cursor
+        filepath: path to json file
+        Return: None
+    """
     # open log file
     df = pd.read_json(filepath, lines=True)
 
@@ -62,6 +80,15 @@ def process_log_file(cur, filepath):
 
 
 def process_data(cur, conn, filepath, func):
+    """
+        processes the data in the file that is located in the filepath argument
+        Arguments:
+        cur: DB cursor
+        conn: connection to DB
+        filepath: path to json file
+        func: function name to execute
+        Return: None
+    """
     # get all files matching extension from directory
     all_files = []
     for root, dirs, files in os.walk(filepath):
